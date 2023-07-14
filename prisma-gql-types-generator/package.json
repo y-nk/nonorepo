@@ -1,0 +1,26 @@
+{
+  "name": "prisma-gql-types-generator",
+  "version": "1.0.1",
+  "description": "a prisma generator to output only graphql types and enums",
+  "homepage": "https://github.com/y-nk/nonorepo/tree/main/prisma-gql-types-generator",
+  "private": false,
+  "keywords": ["prisma", "generator", "graphql"],
+  "author": "Julien Barbay <julien.barbay@gmail.com>",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "bin": {
+    "prisma-gql-types-generator": "./dist/index.js"
+  },
+  "scripts": {
+    "start": "tsc --watch",
+    "build": "tsc",
+    "deploy": "npm publish --access public"
+  },
+  "devDependencies": {
+    "typescript": "^5.1.6"
+  },
+  "dependencies": {
+    "@prisma/generator-helper": "^4.16.2",
+    "mkdirp": "^3.0.1"
+  }
+}
