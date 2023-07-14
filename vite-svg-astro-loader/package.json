@@ -1,7 +1,8 @@
 {
   "name": "vite-svg-astro-loader",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "a vite loader dedicated to load svg files as astro components",
+  "homepage": "https://github.com/y-nk/nonorepo/tree/main/vite-svg-astro-loader",
   "keywords": [
     "astro",
     "svg",
@@ -13,7 +14,7 @@
   "license": "MIT",
   "main": "index.mjs",
   "scripts": {
-    "postversion": "git push --follow-tags"
+    "deploy": "npm publish --access public"
   },
   "peerDependencies": {
     "astro": "^2.8.0"
