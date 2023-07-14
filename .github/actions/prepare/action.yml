@@ -1,0 +1,35 @@
+name: Generic flow
+description: ''
+
+branding:
+  icon: loader
+  color: purple
+
+inputs:
+  project:
+    description: folder to run the flow in
+    required: true
+
+runs:
+  using: composite
+
+  steps:
+    - name: Setup node
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18
+        registry-url: 'https://registry.npmjs.org'
+
+    - name: Setup cache
+      uses: actions/cache@v3
+      id: cache
+      with:
+        key: ${{ inputs.project }}-${{ hashFiles('${{ inputs.project }}/yarn.lock') }}
+        path: ${{ inputs.project }}/node_modules
+
+    - name: Install deps
+      if: ${{ steps.cache.outputs.cache-hit != 'true' }}
+
+      shell: bash
+      working-directory: ${{ inputs.project }}
+      run: yarn --frozen-lockfile

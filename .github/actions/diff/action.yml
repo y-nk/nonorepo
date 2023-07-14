@@ -1,0 +1,74 @@
+name: Find projects which were updated
+description: ''
+
+branding:
+  icon: git-branch
+  color: blue
+
+inputs:
+  only-deployed:
+    description: if true, filter out projects which package.json version field were not updated.
+    default: 'false'
+
+outputs:
+  result:
+    description: array of projects which have changed
+    value: ${{ steps.diff.outputs.result }}
+
+runs:
+  using: composite
+
+  steps:
+    - name: compute
+      uses: actions/github-script@v6
+      id: diff
+      with:
+        script: |
+          // utility
+          const fs = require('fs');
+          const util = require('util');
+          const bash = util.promisify(require('child_process').exec);
+
+          // see: https://advancedweb.hu/how-to-use-async-functions-with-array-filter-in-javascript/
+          const asyncFilter = async (arr, predicate) => {
+            const results = await Promise.all(arr.map(predicate));
+            return arr.filter((_v, index) => results[index]);
+          };
+
+          // variables
+          const onlyDeployed = ${{ inputs.only-deployed }};
+
+          const base = '${{ github.event.pull_request.base.sha || github.event.before }}';
+          const head = '${{ github.event.pull_request.head.sha || github.event.after }}';
+
+          // script
+          const { stdout } = await bash(`git diff --name-only ${base} ${head}`);
+
+          const projects = stdout
+            .split('\n')
+            .filter(path => !path.startsWith('.')) // dotfiles ignored
+            .filter(path => path.includes('/')) // subfolders only
+            .map(path => path.split('/', 1).at(0)) // base folder only
+            .filter((e, i, a) => a.indexOf(e) === i) // remove duplicates
+            .filter(path => fs.existsSync(`./${path}`)) // filter removed
+
+          // return all
+          if (!onlyDeployed) return projects
+
+          // 2nd pass of filtering
+          return await asyncFilter(projects, async (path) => {
+            const packageJson = `./${path}/package.json`
+
+            // get the base package.json to detect if there was a change
+            try {
+              const { stdout } = await bash(`git show ${base}:${packageJson}`);
+
+              const oldPackageJson = JSON.parse(stdout);
+              const newPackageJson = require(packageJson);
+
+              return oldPackageJson.version !== newPackageJson.version
+            } catch (err) {
+              // most likely a new project.
+              return true
+            }
+          })
