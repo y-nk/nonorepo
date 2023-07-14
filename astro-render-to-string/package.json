@@ -1,0 +1,23 @@
+{
+  "name": "astro-render-to-string",
+  "version": "1.0.0",
+  "description": "a unofficial utility to render an astro component as a string",
+  "homepage": "https://github.com/y-nk/nonorepo/tree/main/astro-render-to-string",
+  "keywords": ["astro", "component", "utility", "toString"],
+  "author": "Julien Barbay <julien.barbay@gmail.com>",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "start": "tsc --watch",
+    "build": "tsc",
+    "deploy": "npm publish --access public"
+  },
+  "devDependencies": {
+    "astro": "^2.8.3",
+    "typescript": "^5.1.6"
+  },
+  "peerDependencies": {
+    "astro": "^2.8.3"
+  }
+}
