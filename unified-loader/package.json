@@ -1,0 +1,27 @@
+{
+  "name": "unified-loader",
+  "version": "1.2.1",
+  "description": "a non-opiniated unified loader for wepack",
+  "homepage": "https://github.com/y-nk/nonorepo/tree/main/unified-loader",
+  "private": false,
+  "keywords": ["webpack", "loader", "unified", "remark", "rehype", "markdown"],
+  "author": "Julien Barbay <julien.barbay@gmail.com>",
+  "license": "MIT",
+  "main": "./dist/index.js",
+  "scripts": {
+    "dev": "npm run build -- --watch",
+    "build": "tsup src/index.mjs --clean --format=cjs,esm",
+    "deploy": "npm publish --access public"
+  },
+  "dependencies": {
+    "minify": "^9.1.0",
+    "rehype-stringify": "^9.0.3",
+    "remark-parse": "^10.0.1",
+    "remark-rehype": "^10.1.0",
+    "unified": "^10.1.2",
+    "vfile-matter": "^4.0.0"
+  },
+  "devDependencies": {
+    "tsup": "^6.5.0"
+  }
+}
