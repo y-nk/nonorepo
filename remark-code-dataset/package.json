@@ -1,0 +1,19 @@
+{
+  "name": "remark-code-dataset",
+  "type": "module",
+  "version": "2.1.0",
+  "description": "adds codeblock meta as html dataset",
+  "homepage": "https://github.com/y-nk/nonorepo/tree/main/remark-code-dataset",
+  "private": false,
+  "keywords": ["unified", "remark", "code"],
+  "author": "Julien Barbay <julien.barbay@gmail.com>",
+  "license": "MIT",
+  "main": "index.js",
+  "scripts": {
+    "deploy": "npm publish --access public"
+  },
+  "dependencies": {
+    "json5": "^2.2.3",
+    "unist-util-visit": "^4.1.1"
+  }
+}
