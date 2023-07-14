@@ -12,7 +12,7 @@
 import { renderToString } from 'astro-render-to-string'
 import MyComponent from './MyComponent.astro'
 
-console.log(renderToString(MyComponent))
+console.log(await renderToString(MyComponent))
 ```
 
 ## Use cases
@@ -41,7 +41,7 @@ import { renderToString } from 'astro-render-to-string'
 import MyComponent from './MyComponent.astro'
 
 export async function get(context) {
-  return new Response(renderToString(MyComponent, context))
+  return new Response(await renderToString(MyComponent, context))
 }
 ```
 
@@ -71,7 +71,7 @@ solved this way (you can make an utility function out of it).
 import FourOhFour from '~/server-pages/404.astro'
 
 if (some_condition) {
-  return new Response(renderToString(FourOhFour, Astro), {
+  return new Response(await renderToString(FourOhFour, Astro), {
     status: 404,
   })
 }
