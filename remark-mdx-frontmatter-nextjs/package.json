@@ -1,0 +1,19 @@
+{
+  "name": "remark-mdx-frontmatter-nextjs",
+  "version": "1.1.2",
+  "description": "remark-mdx plugin to pass frontmatter data to nextjs page props",
+  "homepage": "https://github.com/y-nk/nonorepo/tree/main/remark-mdx-frontmatter-nextjs",
+  "keywords": ["unified", "remark", "mdx", "frontmatter", "next.js"],
+  "author": "Julien Barbay <julien.barbay@gmail.com>",
+  "license": "MIT",
+  "main": "index.mjs",
+  "types": "index.d.ts",
+  "scripts": {
+    "deploy": "npm publish --access public"
+  },
+  "dependencies": {
+    "acorn": "^8.7.0",
+    "js-yaml": "^4.1.0",
+    "toml": "^3.0.0"
+  }
+}
