@@ -1,0 +1,22 @@
+{
+  "name": "remark-regexp",
+  "type": "module",
+  "version": "2.0.1",
+  "description": "a quick plugin which use regexp to remap markdown to html",
+  "homepage": "https://github.com/y-nk/nonorepo/tree/main/remark-regexp",
+  "keywords": [
+    "unified",
+    "remark",
+    "regexp",
+    "html"
+  ],
+  "author": "Julien Barbay <julien.barbay@gmail.com>",
+  "license": "MIT",
+  "main": "index.js",
+  "scripts": {
+    "deploy": "npm publish --access public"
+  },
+  "dependencies": {
+    "unist-util-visit": "^4.1.1"
+  }
+}
