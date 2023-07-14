@@ -60,5 +60,4 @@ jobs:
 
       - name: Deploy
         working-directory: ${{ matrix.project }}
-        continue-on-error: true
         run: npm run deploy --if-present
