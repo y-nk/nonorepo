@@ -1,0 +1,36 @@
+{
+  "name": "@y_nk/next-utils",
+  "version": "1.5.1",
+  "description": "A set of utils for next.js",
+  "homepage": "https://github.com/y-nk/nonorepo/tree/main/next-utils",
+  "private": false,
+  "keywords": [
+    "next",
+    "next.js",
+    "utils",
+    "tools"
+  ],
+  "author": "Julien Barbay <julien.barbay@gmail.com>",
+  "license": "MIT",
+  "main": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "start": "tsup src/index.ts --format=esm --dts --watch",
+    "build": "tsup src/index.ts --format=esm --dts",
+    "deploy": "npm publish --access public"
+  },
+  "peerDependencies": {
+    "next": "^13.4",
+    "next-auth": "^4.22.1",
+    "react": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.2.1",
+    "@types/react": "^18.2.14",
+    "next": "^13.4",
+    "next-auth": "^4.22.1",
+    "react": "^18.2.0",
+    "tsup": "^6.7.0",
+    "typescript": "^5.0.4"
+  }
+}
