@@ -1,0 +1,37 @@
+{
+  "name": "remark-openai",
+  "type": "module",
+  "version": "1.0.1",
+  "description": "A remark plugin to use code blocks as placeholder for generated content from openai",
+  "homepage": "https://github.com/y-nk/nonorepo/tree/main/remark-openai",
+  "keywords": [
+    "unifiedjs",
+    "remarkjs",
+    "unified",
+    "remark",
+    "openai",
+    "ai",
+    "generate",
+    "markdown",
+    "content"
+  ],
+  "author": "Julien Barbay <julien.barbay@gmail.com>",
+  "license": "MIT",
+  "main": "index.mjs",
+
+
+  "scripts": {
+    "deploy": "npm publish --access public"
+  },
+  "dependencies": {
+    "json5": "^2.2.3",
+    "openai": "^3.2.1",
+    "remark": "^14.0.2",
+    "unist-util-visit": "^4.1.2"
+  },
+  "devDependencies": {
+    "remark-html": "^15.0.2",
+    "remark-parse": "^10.0.1",
+    "unified": "^10.1.2"
+  }
+}
