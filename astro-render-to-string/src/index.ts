@@ -12,6 +12,7 @@ type Opts = {
   params?: any;
   props?: any;
   slots?: any;
+  renderers?: any;
   request?: any;
   response?: any;
   url?: any;
@@ -28,8 +29,9 @@ function notSupported(feat: string) {
  */
 function createResult({
   cookies,
-  params,
-  props,
+  params = {},
+  props = {},
+  renderers = [],
   request,
   response,
   url,
@@ -39,7 +41,6 @@ function createResult({
     scripts: new Set(),
     links: new Set(),
     componentMetadata: new Map(),
-    renderers: [],
     clientDirectives: new Map(),
     compressHTML: true,
     pathname: "",
@@ -67,6 +68,7 @@ function createResult({
     cookies,
     params,
     props,
+    renderers,
     request,
     response,
     url,

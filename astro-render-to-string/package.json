@@ -1,6 +1,6 @@
 {
   "name": "astro-render-to-string",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "a unofficial utility to render an astro component as a string",
   "homepage": "https://github.com/y-nk/nonorepo/tree/main/astro-render-to-string",
   "keywords": ["astro", "component", "utility", "toString"],
