@@ -17,6 +17,43 @@ export default defineConfig({
 });
 ```
 
+## Using templates
+
+By default, the import type from a `import myMarkdown from './markdown.md'` is `string` but you can customize this behavior to accomodate your favorite framework.
+
+The mechanism is straightforward:
+
+1. add a `templates: {}` option to the plugin
+2. in that `templates`, pass an id as key (`vue`), and a `type TemplateFn = (html: string) => string` as value.
+3. change your import string to include `?as=` followed by your id, and your template function will be executed at transform time.
+
+Example:
+
+```ts
+import { defineConfig } from "vite";
+import remarkRehypePlugin, { TemplateFn } from "vite-plugin-remark-rehype";
+
+const vueTemplateFn: TemplateFn = (html) => `export default { template: ${html} }`
+
+export default defineConfig({
+  plugins: [
+    remarkRehypePlugin({
+      templates: {
+        vue: vueTemplateFn
+      }
+    }),
+  ],
+});
+```
+
+...and later in your files
+
+```
+import myMarkdown from '~/path-to-markdown.md?as=vue'
+```
+
+For Typescript, you will have to add the proper type support for this import string (see below).
+
 ## Adding type support
 
 In your `tsconfig.json`
@@ -33,6 +70,11 @@ Or you can add a `.d.ts` file in your project root containing
 
 ```ts
 declare module "*.md" {
+  const html: string;
+  export default html;
+}
+
+declare module "*.md?as=string" {
   const html: string;
   export default html;
 }

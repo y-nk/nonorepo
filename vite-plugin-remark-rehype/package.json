@@ -1,7 +1,7 @@
 {
   "name": "vite-plugin-remark-rehype",
   "type": "module",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "a vite plugin to load remark/rehype pipeline into vite",
   "homepage": "https://github.com/y-nk/nonorepo/tree/main/vite-plugin-remark-rehype",
   "private": false,
@@ -9,7 +9,9 @@
     "vite",
     "plugin",
     "remark",
-    "rehype"
+    "rehype",
+    "html",
+    "react"
   ],
   "author": "Julien Barbay <julien.barbay@gmail.com>",
   "license": "MIT",
@@ -27,6 +29,7 @@
     "deploy": "npm publish --access public"
   },
   "dependencies": {
+    "@types/react": "^18.2.18",
     "rehype-stringify": "^9.0.3",
     "remark-parse": "^10.0.1",
     "remark-rehype": "^10.1.0",

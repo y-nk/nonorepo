@@ -12,21 +12,33 @@ import type { Options as RemarkParseOptions } from "remark-parse";
 import type { Options as RemarkRehypeOptions } from "remark-rehype";
 import type { Options as RehypeStringifyOptions } from "rehype-stringify";
 
+import * as DEFAULT_TEMPLATES from "./templates";
+import { TemplateFn } from "./templates/utils";
+
 type PluginOptions = {
+  templates?: Record<string, TemplateFn>,
   remarkPlugins?: PluggableList;
   rehypePlugins?: PluggableList;
   remarkParseOptions?: RemarkParseOptions;
-  remarkRehypeOptions?: RemarkRehypeOptions; 
+  remarkRehypeOptions?: RemarkRehypeOptions;
   rehypeStringifyOptions?: RehypeStringifyOptions;
 };
 
+export * from './templates/utils'
+
 export default function vitePlugin({
+  templates = {},
   remarkPlugins = [],
   rehypePlugins = [],
   remarkParseOptions = {},
   remarkRehypeOptions = {},
   rehypeStringifyOptions = {},
 }: PluginOptions = {}): Plugin {
+  const templateFns = {
+    ...DEFAULT_TEMPLATES,
+    ...templates,
+  }
+
   // unified plugin stack
   const unifiedPlugins: PluggableList = [
     [remarkParse, remarkParseOptions],
@@ -47,16 +59,26 @@ export default function vitePlugin({
       rootPath = config.root;
     },
 
-    async transform(code, id) {
-      if (id.endsWith(".md")) {
-        const htmlContent = await compiler.process(code);
+    async transform(mdContent, id) {
+      try {
+        const url = new URL(id, 'file://')
 
-        return {
-          code: `export default ${JSON.stringify(
+        if (url.pathname.endsWith(".md")) {
+          const templateName = url.searchParams.get('as') ?? 'string'
+          const templateFn = templateFns[templateName] ?? templateFns['string']
+
+          const htmlContent = await compiler.process(mdContent);
+          const stringifiedHtml = JSON.stringify(
             htmlContent.toString("utf8")
-          )}`,
-          map: { mappings: "" },
-        };
+          )
+
+          return {
+            code: templateFn(stringifiedHtml)
+          };
+        }
+      } catch {
+        // we dont know what file can be transformed so we're limiting
+        // to fs-loaded files for now. if there's a PR or some issue, let's see.
       }
     },
 
