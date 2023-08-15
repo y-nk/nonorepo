@@ -1,7 +1,7 @@
 {
   "name": "@y_nk/astro-components",
   "type": "module",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A set of generic components used to kickstart a project",
   "homepage": "https://github.com/y-nk/nonorepo/tree/main/astro-components",
   "keywords": ["astro", "components", "component", "library", "markdown", "utils", "debug"],
