@@ -1,0 +1,33 @@
+---
+import Metas from './Metas.astro'
+
+const PROPS_TO_NAME = {
+  'site': 'og:site_name',
+  'title': 'og:title',
+  'type': 'og:type',
+  'url': 'og:url',
+  'locale': 'og:locale',
+  'locales': 'og:locale:alternate',
+  'description': 'og:description',
+  'image': 'og:image',
+  'audio': 'og:audio',
+  'video': 'og:video',
+}
+
+export type Props = {
+  site?: string
+  title: string
+  type?: 'website' | 'article' | 'book' | 'profile'
+  url: string
+  locale?: string
+  locales?: string[]
+  description?: string
+  image?: string
+  audio?: string
+  video?: string
+}
+
+Astro.props.type ??= 'website'
+---
+
+<Metas config={PROPS_TO_NAME} values={Astro.props} />

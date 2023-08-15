@@ -1,0 +1,9 @@
+---
+export type Props = Record<string, string>
+---
+
+{
+  Object.entries(Astro.props).map(([lang, href]) => (
+    <link rel="alternate" hreflang={lang} href={href} />
+  ))
+}

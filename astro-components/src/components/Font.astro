@@ -1,0 +1,44 @@
+---
+export type Props = {
+  fontFamily: string
+  fontStyle?: string
+  fontWeight?: number
+  fontDisplay?: string
+  format: string
+  preload?: boolean
+  url: string
+  type: string
+}
+
+const {
+  fontFamily,
+  fontStyle = 'normal',
+  fontWeight = 400,
+  fontDisplay = 'swap',
+  format,
+  preload = true,
+  url,
+  type,
+} = Astro.props
+
+const fontface = `@font-face {
+  font-family: ${fontFamily};
+  src: url("${url}") format("${format}");
+  font-weight: ${fontWeight};
+  font-style: ${fontStyle};
+  font-display: ${fontDisplay};
+}`
+---
+
+{
+  preload && (
+    <link
+      rel="preload"
+      href={url}
+      as="font"
+      type={type}
+      crossorigin="anonymous"
+    />
+  )
+}
+<style is:inline set:html={fontface}></style>

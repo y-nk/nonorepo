@@ -1,0 +1,14 @@
+<input type="checkbox" name="devmode" />
+
+<style is:inline>
+  input[name='devmode'] {
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+  }
+
+  input[name='devmode']:checked ~ * * {
+    outline: 1px solid #f00 !important;
+  }
+</style>

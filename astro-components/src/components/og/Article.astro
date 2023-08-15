@@ -1,0 +1,23 @@
+---
+import Metas from './Metas.astro'
+
+const PROPS_TO_NAME = {
+  'section': 'article:section',
+  'authors': 'article:author',
+  'tags': 'article:tag',
+  'publishedTime': 'article:published_time',
+  'modifiedTime': 'article:modified_time',
+  'expirationTime': 'article:expiration_time',
+}
+
+export type Props = {
+  section?: string
+  authors?: string[]
+  tags?: string[]
+  publishedTime: string
+  modifiedTime?: string
+  expirationTime?: string
+}
+---
+
+<Metas config={PROPS_TO_NAME} values={Astro.props} />

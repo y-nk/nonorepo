@@ -1,0 +1,23 @@
+---
+import Metas from './Metas.astro'
+
+const PROPS_TO_NAME = {
+  'url': 'og:image:url',
+  'secureUrl': 'og:image:secure_url',
+  'type': 'og:image:type',
+  'alt': 'og:image:alt',
+  'width': 'og:image:width',
+  'height': 'og:image:height',
+}
+
+export type Props = {
+  url: string
+  secureUrl?: string
+  type?: string
+  alt?: string
+  width?: string
+  height?: string
+}
+---
+
+<Metas config={PROPS_TO_NAME} values={Astro.props} />

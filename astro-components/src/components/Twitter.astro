@@ -1,0 +1,29 @@
+---
+export type Props = {
+  card?: string
+  site?: string
+  title?: string
+  creator?: string
+  description?: string
+  image?: string
+  alt?: string
+}
+
+const PROPS_TO_NAME: Record<string, string> = {
+  'card': 'twitter:card',
+  'site': 'twitter:site',
+  'title': 'twitter:title',
+  'creator': 'twitter:creator',
+  'description': 'twitter:description',
+  'image': 'twitter:image',
+  'alt': 'twitter:image:alt'
+}
+---
+
+{
+  Object.entries(PROPS_TO_NAME)
+    .filter(([prop]) => !!Astro.props[prop])
+    .map(([prop, name]) => (
+      <meta name={name} content={Astro.props[prop]} />
+    ))
+}

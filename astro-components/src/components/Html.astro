@@ -1,0 +1,64 @@
+---
+import DevMode from './DevMode.astro'
+
+export type Props = {
+  lang?: string
+  favicon?: string
+  links?: Record<string, string>[]
+  stylesheets?: string[]
+  scripts?: string[]
+}
+
+const {
+  lang = 'en',
+  favicon = '/favicon.svg',
+  links = [],
+  stylesheets = [],
+  scripts = [],
+} = Astro.props
+
+const baseUrl = new URL(import.meta.env.BASE_URL, import.meta.env.SITE)
+---
+
+<!DOCTYPE html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <base href={baseUrl.toString()} />
+    {favicon && <link rel="favicon" href={favicon} />}
+
+    <slot name="head" />
+
+    <slot name="links">
+      {links.map(attrs => <link {...attrs} />)}
+    </slot>
+
+    <slot name="stylesheets">
+      {stylesheets.map(href => <link rel="stylesheet" href={href} />)}
+    </slot>
+
+    <slot name="scripts">
+      {scripts.map(src => <script src={src} is:inline />)}
+    </slot>
+
+    <noscript>
+      <slot name="noscript" />
+    </noscript>
+  </head>
+
+  <body>
+    {import.meta.env.DEV && <DevMode />}
+
+    <slot name="body">
+      <slot />
+    </slot>
+  </body>
+</html>
+
+<style is:global>
+  *,
+  :before,
+  :after {
+    box-sizing: border-box;
+  }
+</style>

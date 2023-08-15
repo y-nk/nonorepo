@@ -1,0 +1,23 @@
+---
+import type { AstroBuiltinAttributes } from 'astro';
+
+import { parseMarkdown, ParserOptions } from '~/lib/markdown'
+
+export type Props = {
+  ['class']?: string
+  ['class:list']?: AstroBuiltinAttributes
+  content: string
+  options?: ParserOptions
+}
+
+const {
+  ['class']: className,
+  ['class:list']: classList,
+  content,
+  options,
+} = Astro.props
+
+const html = await parseMarkdown(content, options)
+---
+
+<div class:list={[className, classList]} set:html={html} />

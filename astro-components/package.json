@@ -1,0 +1,26 @@
+{
+  "name": "@y_nk/astro-components",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "A set of generic components used to kickstart a project",
+  "homepage": "https://github.com/y-nk/nonorepo/tree/main/astro-components",
+  "keywords": ["astro", "components", "component", "library", "markdown", "utils", "debug"],
+  "author": "Julien Barbay <julien.barbay@gmail.com>",
+  "license": "MIT",
+  "exports": {
+    "./*": "src/components/*"
+  },
+  "scripts": {
+    "deploy": "npm publish --access public"
+  },
+  "dependencies": {
+    "rehype-stringify": "^9.0.3",
+    "remark-gfm": "^3.0.1",
+    "remark-parse": "^10.0.2",
+    "remark-rehype": "^10.1.0",
+    "unified": "^10.1.2"
+  },
+  "devDependencies": {
+    "astro": "^2.10.7"
+  }
+}

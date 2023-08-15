@@ -1,0 +1,58 @@
+---
+import Og from './og/Basic.astro'
+
+export interface Props {
+  locale?: string
+  title: string
+  description?: string
+  keywords?: string | string[]
+  url?: string
+  robots?: string
+  viewport?: string
+  ['with-og']?: boolean
+}
+
+const {
+  locale,
+  title,
+  description,
+  keywords,
+  url = Astro.url.href,
+  robots = 'index,follow',
+  viewport = 'width=device-width',
+  ['with-og']: withOg
+} = Astro.props
+---
+
+<>
+  <title>{title}</title>
+
+  <meta name="title" content={title} />
+  {description && <meta name="description" content={description} />}
+  {
+    keywords?.length && (
+      <meta
+        name="keywords"
+        content={Array.isArray(keywords) ? keywords.join(' ') : keywords}
+      />
+    )
+  }
+
+  <meta name="robots" content={robots} />
+  <meta name="viewport" content={viewport} />
+
+  <link rel="canonical" href={url} />
+
+  {withOg && (
+    <Og
+      site={Astro.site}
+      type="website"
+      url={url}
+      locale={locale}
+      title={title}
+      description={description}
+    />
+  )}
+
+  <slot />
+</>

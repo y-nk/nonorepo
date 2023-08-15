@@ -1,0 +1,17 @@
+---
+export type Props = {
+  config: Record<string, string>
+  values: Record<string, string | string[]>
+}
+
+const { config, values } = Astro.props
+---
+
+{
+  Object.entries(config)
+    .filter(([prop]) => (values[prop]?.length ?? 0) > 0)
+    .map(([prop, name]) => [name, [].concat(values[prop])])
+    .map(([key, vals]) => (
+      vals.map(val => <meta property={key} content={val} />)
+    ))
+}
