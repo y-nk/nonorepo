@@ -1,0 +1,22 @@
+{
+  "name": "@y_nk/astro-post-build",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "an integration to execute a function after all things are done",
+  "homepage": "https://github.com/y-nk/nonorepo/tree/main/astro-post-build",
+  "keywords": [
+    "astro",
+    "integration",
+    "build"
+  ],
+  "author": "Julien Barbay <julien.barbay@gmail.com>",
+  "license": "MIT",
+  "main": "./index.ts",
+  "types": "./index.ts",
+  "scripts": {
+    "deploy": "npm publish --access public"
+  },
+  "devDependencies": {
+    "astro": "^3.0.13"
+  }
+}
