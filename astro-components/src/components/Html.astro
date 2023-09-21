@@ -1,7 +1,11 @@
 ---
+import type { AstroBuiltinAttributes } from 'astro'
+
 import DevMode from './debug/DevMode.astro'
 
 export type Props = {
+  class?: string
+  ['class:list']?: AstroBuiltinAttributes['class:list']
   lang?: string
   favicon?: string
   links?: Record<string, string>[]
@@ -10,6 +14,8 @@ export type Props = {
 }
 
 const {
+  class: className,
+  ['class:list']: classList,
   lang = 'en',
   favicon = '/favicon.svg',
   links = [],
@@ -51,7 +57,7 @@ const baseUrl = SITE ? new URL(BASE_URL ?? '', SITE) : null
     </noscript>
   </head>
 
-  <body>
+  <body class:list={[className, classList]}>
     {import.meta.env.DEV && <DevMode />}
 
     <slot name="body">
