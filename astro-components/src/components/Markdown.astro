@@ -1,11 +1,12 @@
 ---
 import type { AstroBuiltinAttributes } from 'astro';
 
-import { parseMarkdown, ParserOptions } from '~/lib/markdown'
+import { parseMarkdown, ParserOptions } from '../utils/markdown'
 
 export type Props = {
   ['class']?: string
   ['class:list']?: AstroBuiltinAttributes
+  as?: string
   content: string
   options?: ParserOptions
 }
@@ -13,6 +14,7 @@ export type Props = {
 const {
   ['class']: className,
   ['class:list']: classList,
+  as: Tag,
   content,
   options,
 } = Astro.props
@@ -20,4 +22,8 @@ const {
 const html = await parseMarkdown(content, options)
 ---
 
-<div class:list={[className, classList]} set:html={html} />
+{
+  Tag
+    ? <Tag class:list={[className, classList]} set:html={html} />
+    : <Fragment set:html={html} />
+}
