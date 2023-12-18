@@ -5,25 +5,33 @@ import { parseMarkdown, ParserOptions } from '../utils/markdown'
 
 export type Props = {
   ['class']?: string
-  ['class:list']?: AstroBuiltinAttributes
+  ['class:list']?: AstroBuiltinAttributes['class:list']
+  style?: any
+
   as?: string
   content: string
   options?: ParserOptions
 }
 
 const {
-  ['class']: className,
-  ['class:list']: classList,
+  ['class']: className = '',
+  ['class:list']: classList = {},
+  style = {},
+
   as: Tag,
   content,
   options,
 } = Astro.props
 
 const html = await parseMarkdown(content, options)
+
+if (import.meta.env.DEV && !Tag && (className || classList || style)) {
+  console.warn('[astro-components] using Markdown component without `as` will ignore `className`, `classList` nor `style` attributes.')
+}
 ---
 
 {
   Tag
-    ? <Tag class:list={[className, classList]} set:html={html} />
+    ? <Tag class:list={[className, classList]} style={style} set:html={html} />
     : <Fragment set:html={html} />
 }
