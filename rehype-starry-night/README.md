@@ -1,3 +1,6 @@
+> [!IMPORTANT]
+> This package is not maintained by me anymore. I've only written this package at a time where it was not yet existing in the unified ecosystem and they didn't have time to create it. I've been approached by @wooorm about taking over and I think it's the right thing to do. This package would be in better hands with this community rather than myself. The latest source will be available at the homepage url of the package, which you'll find directly at https://www.npmjs.com/package/rehype-starry-night.
+
 # rehype-starry-night
 
 ## What is it?
