@@ -17,16 +17,16 @@
   "types": "dist/index.d.ts",
   "exports": {
     ".": {
-      "default": "./dist/index.js",
-      "types": "./dist/index.d.ts"
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
     },
     "./astro": {
-      "default": "./dist/astro.js",
-      "types": "./dist/astro.d.ts"
+      "types": "./dist/astro.d.ts",
+      "default": "./dist/astro.js"
     },
     "./register": {
-      "default": "./dist/register.js",
-      "types": "./dist/register.d.ts"
+      "types": "./dist/register.d.ts",
+      "default": "./dist/register.js"
     }
   },
   "scripts": {
