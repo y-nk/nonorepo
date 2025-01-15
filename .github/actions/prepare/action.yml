@@ -32,4 +32,4 @@ runs:
 
       shell: bash
       working-directory: ${{ inputs.project }}
-      run: yarn --frozen-lockfile
+      run: npm ci
