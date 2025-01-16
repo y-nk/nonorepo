@@ -11,6 +11,8 @@ import { Reflector } from "@nestjs/core";
 export class ClerkAclGuard implements CanActivate {
   constructor(private reflector: Reflector) {}
   canActivate(context: ExecutionContext) {
+    if (context.getType() !== "http") return true;
+
     const permission = this.reflector.get<string | undefined>(
       "Acl",
       context.getHandler(),
