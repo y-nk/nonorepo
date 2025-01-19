@@ -7,6 +7,8 @@ import {
 } from "@nestjs/common";
 import { Reflector } from "@nestjs/core";
 
+import { CLERK_ACL } from "./tokens";
+
 @Injectable()
 export class ClerkAclGuard implements CanActivate {
   constructor(private reflector: Reflector) {}
@@ -14,7 +16,7 @@ export class ClerkAclGuard implements CanActivate {
     if (context.getType() !== "http") return true;
 
     const permission = this.reflector.get<string | undefined>(
-      "ClerkAcl",
+      CLERK_ACL,
       context.getHandler(),
     );
 

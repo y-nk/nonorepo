@@ -4,12 +4,14 @@ import { APP_GUARD } from "@nestjs/core";
 
 import { ClerkAclGuard } from "./acl.guard";
 import { ClerkAuthGuard } from "./auth.guard";
+import { ClerkClaimsGuard } from "./claim.guard";
 import { CLERK_CLIENT, CLERK_CONFIG } from "./tokens";
 import type { ClerkConfig } from "./types";
 
 const providers: Provider[] = [
   ClerkAuthGuard,
   ClerkAclGuard,
+  ClerkClaimsGuard,
   {
     provide: APP_GUARD,
     useExisting: ClerkAuthGuard,
@@ -17,6 +19,10 @@ const providers: Provider[] = [
   {
     provide: APP_GUARD,
     useExisting: ClerkAclGuard,
+  },
+  {
+    provide: APP_GUARD,
+    useExisting: ClerkClaimsGuard,
   },
   {
     provide: CLERK_CLIENT,

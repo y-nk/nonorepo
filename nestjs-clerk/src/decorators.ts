@@ -5,17 +5,18 @@ import {
   type CustomDecorator,
   type ExecutionContext,
 } from "@nestjs/common";
+import { CLERK_ACL, CLERK_CLAIMS, NO_CLERK_AUTH } from "./tokens";
 
 export function NoAuth(): CustomDecorator {
-  return SetMetadata("NoClerkAuth", true);
+  return SetMetadata(NO_CLERK_AUTH, true);
 }
 
 export function ClerkAcl(permission: string): CustomDecorator {
-  return SetMetadata("ClerkAcl", permission);
+  return SetMetadata(CLERK_ACL, permission);
 }
 
 export function ClerkClaims(claims: Record<string, string | number | boolean>): CustomDecorator {
-  return SetMetadata("ClerkClaims", claims);
+  return SetMetadata(CLERK_CLAIMS, claims);
 }
 
 export const Clerk = createParamDecorator(

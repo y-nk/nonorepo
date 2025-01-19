@@ -6,6 +6,8 @@ import {
   type ExecutionContext
 } from "@nestjs/common";
 import { Reflector } from "@nestjs/core";
+
+import { CLERK_CLAIMS } from "./tokens";
 import { get } from "./utils";
 
 type ClerkClaims = Record<string, string | number | boolean>
@@ -17,7 +19,7 @@ export class ClerkClaimsGuard implements CanActivate {
     if (context.getType() !== "http") return true;
 
     const claims = this.reflector.get<ClerkClaims | undefined>(
-      "ClerkClaims",
+      CLERK_CLAIMS,
       context.getHandler(),
     );
 

@@ -1,6 +1,6 @@
 {
   "name": "@y_nk/nestjs-clerk",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "auth and permission guards using clerk for nestjs",
   "homepage": "https://github.com/y-nk/nonorepo/tree/main/astro-components",
   "keywords": [
