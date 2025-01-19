@@ -32,8 +32,9 @@ const providers: Provider[] = [
 
 @Module({})
 export class ClerkModule {
-  static register(clerkConfig?: ClerkConfig) {
+  static register(clerkConfig?: ClerkConfig, global = true) {
     return {
+      global,
       module: ClerkModule,
       providers: [
         {
@@ -46,8 +47,9 @@ export class ClerkModule {
     };
   }
 
-  static async registerAsync(provider: Provider<ClerkConfig>) {
+  static async registerAsync(provider: Provider<ClerkConfig>, global = true) {
     return {
+      global,
       module: ClerkModule,
       providers: [
         {

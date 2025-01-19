@@ -15,7 +15,9 @@ export function ClerkAcl(permission: string): CustomDecorator {
   return SetMetadata(CLERK_ACL, permission);
 }
 
-export function ClerkClaims(claims: Record<string, string | number | boolean>): CustomDecorator {
+export function ClerkClaims(
+  claims: Record<string, string | number | boolean>,
+): CustomDecorator {
   return SetMetadata(CLERK_CLAIMS, claims);
 }
 

@@ -4,9 +4,12 @@ export function get<T>(obj: object, path: string, defaultValue?: T) {
     String.prototype.split
       .call(path, regexp)
       .filter(Boolean)
-      .reduce((res, key) => (res !== null && res !== undefined ? res[key] : res), obj)
+      .reduce(
+        (res, key) => (res !== null && res !== undefined ? res[key] : res),
+        obj,
+      );
 
-  const result = travel(/[,[\]]+?/) || travel(/[,[\].]+?/)
+  const result = travel(/[,[\]]+?/) || travel(/[,[\].]+?/);
 
-  return result === undefined || result === obj ? defaultValue : result
-};
+  return result === undefined || result === obj ? defaultValue : result;
+}
