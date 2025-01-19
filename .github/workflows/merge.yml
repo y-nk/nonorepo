@@ -30,7 +30,6 @@ jobs:
           only-deployed: true
 
   build-and-deploy:
-    runs-on: ubuntu-latest
     needs: only-changed
 
     # should have at least one project to run (cannot have empty matrix)
@@ -44,4 +43,5 @@ jobs:
     uses: ./.github/workflows/deploy.yml
     with:
       project: ${{ matrix.project }}
+
     secrets: inherit
