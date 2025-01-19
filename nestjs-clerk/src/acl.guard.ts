@@ -14,14 +14,14 @@ export class ClerkAclGuard implements CanActivate {
     if (context.getType() !== "http") return true;
 
     const permission = this.reflector.get<string | undefined>(
-      "Acl",
+      "ClerkAcl",
       context.getHandler(),
     );
 
+    if (!permission) return true;
+
     const req = context.switchToHttp().getRequest();
     const auth = getAuth(req);
-
-    if (!permission || !auth.userId) return true;
 
     if (!auth.has({ permission })) throw new ForbiddenException();
 

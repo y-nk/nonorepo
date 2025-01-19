@@ -7,11 +7,15 @@ import {
 } from "@nestjs/common";
 
 export function NoAuth(): CustomDecorator {
-  return SetMetadata("NoAuth", true);
+  return SetMetadata("NoClerkAuth", true);
 }
 
-export function Acl(permission: string): CustomDecorator {
-  return SetMetadata("Acl", permission);
+export function ClerkAcl(permission: string): CustomDecorator {
+  return SetMetadata("ClerkAcl", permission);
+}
+
+export function ClerkClaims(claims: Record<string, string | number | boolean>): CustomDecorator {
+  return SetMetadata("ClerkClaims", claims);
 }
 
 export const Clerk = createParamDecorator(

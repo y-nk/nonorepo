@@ -19,7 +19,7 @@ export class ClerkAuthGuard implements CanActivate {
   ) {}
   async canActivate(context: ExecutionContext) {
     const noAuth = [context.getHandler(), context.getClass()].some((target) =>
-      this.reflector.get<boolean>("NoAuth", target),
+      this.reflector.get<boolean>("NoClerkAuth", target),
     );
 
     if (context.getType() !== "http" || noAuth) return true;
