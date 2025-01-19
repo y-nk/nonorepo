@@ -2,6 +2,7 @@ import { clerkMiddleware, getAuth } from "@clerk/express";
 import {
   Inject,
   Injectable,
+  Logger,
   UnauthorizedException,
   type CanActivate,
   type ExecutionContext,
@@ -13,6 +14,8 @@ import type { ClerkConfig } from "./types";
 
 @Injectable()
 export class ClerkAuthGuard implements CanActivate {
+  private logger = new Logger(ClerkAuthGuard.name);
+
   constructor(
     private reflector: Reflector,
     @Inject(CLERK_CONFIG) private clerkConfig: ClerkConfig,
@@ -28,13 +31,19 @@ export class ClerkAuthGuard implements CanActivate {
     const res = context.switchToHttp().getResponse();
     const middleware = clerkMiddleware(this.clerkConfig);
 
-    const error = await new Promise<Error | undefined>((resolve) => {
+    const err = await new Promise<Error | undefined>((resolve) => {
       middleware(req, res, resolve);
     });
 
-    const auth = getAuth(req);
+    try {
+      if (err) throw err;
 
-    if (error || !auth.userId) throw new UnauthorizedException();
+      if (!getAuth(req)?.userId)
+        throw new Error("no auth data");
+    } catch (error) {
+      this.logger.error(error);
+      throw new UnauthorizedException();
+    }
 
     return true;
   }
